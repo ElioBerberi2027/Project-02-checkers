@@ -4,7 +4,7 @@ The Main_Board File holds the Main_Board class which is responsible for managing
 """
 
 import pygame
-from constants import BLACK, ROWS, RED, SQUARE_SIZE, COLS, WHITE
+from constants import BLACK, ROWS, SQUARE_SIZE, COLS, WHITE
 from pieces import Piece
 
 class Main_Board:
@@ -14,11 +14,9 @@ class Main_Board:
     remove a piece, and check for a winner.
     """
     def __init__(self, color):
-        """
-        The init function initializes the Main_Board class with a color and creates the board.
-        """
         self.board = []
         self.color = color
+        self.player2_color = color
         self.red_left = self.white_left = 12
         self.red_kings = self.white_kings = 0
         self.create_board()
@@ -59,8 +57,8 @@ class Main_Board:
             piece.make_king()
             if piece.color == WHITE:
                 self.white_kings += 1
-            else:
-                self.red_kings += 1 
+            elif piece.color == self.player2_color:
+                self.red_kings += 1
 
     def get_piece(self, row, col): 
         """
@@ -82,7 +80,7 @@ class Main_Board:
                     if row < 3:
                         self.board[row].append(Piece(row, col, WHITE))
                     elif row > 4:
-                        self.board[row].append(Piece(row, col, RED))
+                        self.board[row].append(Piece(row, col, self.player2_color))
                     else:
                         self.board[row].append(0)
                 else:
@@ -106,24 +104,23 @@ class Main_Board:
         for piece in pieces:
             self.board[piece.row][piece.col] = 0
             if piece != 0:
-                if piece.color == RED:
+                if piece.color == self.player2_color:
                     self.red_left -= 1
-                else:
+                elif piece.color == WHITE:
                     self.white_left -= 1
-    
-    def winner(self): 
+
+    def winner(self):
         """
         The winner function checks if a winner has been found and returns the winner. If no winner has been found, None is returned.
         If a user has no pieces left or no moves left, the other user is the winner.
         """
-        if self.red_left <= 0 or self.no_moves(RED):
+        if self.red_left <= 0 or self.no_moves(self.player2_color):
             return WHITE
         elif self.white_left <= 0 or self.no_moves(WHITE):
-            return RED
-        
-        return None 
-    
-    def get_valid_moves(self, piece): 
+            return self.player2_color
+        return None
+
+    def get_valid_moves(self, piece):
         """
         The get valid moves function gets all the valid moves for a given piece and returns the moves.
         """
@@ -131,12 +128,14 @@ class Main_Board:
         left = piece.col - 1
         right = piece.col + 1
         row = piece.row
-        if piece.color == RED or piece.king:
-            moves.update(self.move_left(row -1, max(row-3, -1), -1, piece.color, left))
-            moves.update(self.move_right(row -1, max(row-3, -1), -1, piece.color, right))
+
+        if piece.color == self.player2_color or piece.king:
+            moves.update(self.move_left(row - 1, max(row - 3, -1), -1, piece.color, left))
+            moves.update(self.move_right(row - 1, max(row - 3, -1), -1, piece.color, right))
+
         if piece.color == WHITE or piece.king:
-            moves.update(self.move_left(row +1, min(row+3, ROWS), 1, piece.color, left))
-            moves.update(self.move_right(row +1, min(row+3, ROWS), 1, piece.color, right))
+            moves.update(self.move_left(row + 1, min(row + 3, ROWS), 1, piece.color, left))
+            moves.update(self.move_right(row + 1, min(row + 3, ROWS), 1, piece.color, right))
 
         return moves
 

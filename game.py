@@ -23,7 +23,7 @@ class Game:
         self.color = color
         self.selected = None
         self.board = Main_Board(self.color)
-        self.turn = RED
+        self.turn = self.color
         self.valid_moves = {}
         self.font = pygame.font.Font(None, 36)  # Font for rendering text
         self.text_color = WHITE  # Text color
@@ -54,8 +54,8 @@ class Game:
         """
         The display turn function displays the current turn on the screen.
         """
-        if self.turn == RED:
-            text = f"Current Turn: RED"
+        if self.turn == self.color:
+            text = f"Current Turn: COLOR"
         else:
             text = f"Current Turn: WHITE"
         text_surface = self.font.render(text, True, self.text_color)
@@ -65,7 +65,7 @@ class Game:
         """
         The display piece count function displays the piece count on the screen.
         """
-        text = f"RED Pieces Left: {self.board.red_left}"
+        text = f"COLOR Pieces Left: {self.board.red_left}"
         text2 = f"WHITE Pieces Left: {self.board.white_left}"
         text_surface = self.font.render(text, True, self.text_color)
         text_surface2 = self.font.render(text2, True, self.text_color)
@@ -152,10 +152,10 @@ class Game:
         """
         self.valid_moves = {}
         self.turn_start_time = pygame.time.get_ticks()  # Reset the turn timer
-        if self.turn == RED:
+        if self.turn == self.color:
             self.turn = WHITE
         else:
-            self.turn = RED
+            self.turn = self.color
 
     def get_board(self): 
         """
