@@ -167,7 +167,6 @@ def menu_buttons():
     return all_rects
 
 def tutorial(): 
-    # (Existing tutorial code remains unchanged)
     checkers_icon = pygame.image.load('pics/checkersguy_icon.png')
     tutorial_screen = pygame.display.set_mode([Width, Height])
     tutorial_screen.fill((128, 128, 128))
@@ -175,7 +174,6 @@ def tutorial():
     tutorial_text = tutorial_font.render("Welcome to Checkers+!", True, (255, 255, 255))
     tutorial_rect = tutorial_text.get_rect(center=(Width // 2, 50))
     tutorial_screen.blit(tutorial_text, tutorial_rect)
-    # ... (skipping for brevity but keep your original code) ...
     exit_button_font = pygame.font.Font(None, 32)
     exit_button_text = exit_button_font.render("Exit Tutorial", True, (255, 255, 255))
     exit_button_rect = exit_button_text.get_rect(center=(Width // 2, Height - 50))
@@ -190,23 +188,18 @@ def tutorial():
             elif event.type == SONG_END: music_loop()
 
 def settings():
-    # (Existing settings code remains unchanged)
     music_playing = True
     settings_screen = pygame.display.set_mode([Width, Height])
-    # ... (keep your original logic here) ...
     pygame.display.flip()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: pygame.quit(); return
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                # ... (keep your music toggle logic) ...
                 return
             elif event.type == SONG_END: music_loop()
 
 def show_leaderboard():
-    # (Keep your existing leaderboard logic)
     leaderboard_screen = pygame.display.set_mode((1000, 700))
-    # ... 
     pygame.display.flip()
     while True:
         for event in pygame.event.get():
@@ -215,15 +208,12 @@ def show_leaderboard():
             elif event.type == SONG_END: music_loop()
 
 def board_customization(): 
-    # (Keep your existing customization logic)
     board_customization_screen = pygame.display.set_mode([Width, Height])
-    # ...
     pygame.display.flip()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: pygame.quit(); return
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                # ... check color rects ...
                 return
             elif event.type == SONG_END: music_loop()
 
