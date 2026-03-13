@@ -28,13 +28,13 @@ Checkers+ is an exciting Python-based game that offers a modern twist on the cla
 
 - Modern macOS environments often require a Virtual Environment to prevent conflicts with system-wide Python settings. Run these four commands in order inside your Project-02-checkers folder:
 
-python3 -m venv venv
-source venv/bin/activate
+- python3 -m venv venv
+- source venv/bin/activate
+  - (You should now see (venv) appear at the start of your terminal prompt.)
 
-- (You should now see (venv) appear at the start of your terminal prompt.)
-  pip install pygame
-  python Main.py
-- (The game should now be running)
+- pip install pygame
+- python Main.py
+  - (The game should now be running)
 
 # Brainstorming Board
 
